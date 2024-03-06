@@ -3,6 +3,7 @@ let numaletas = 0;
 const tope = 10;
 
 while (numaletas < tope){
+    
     let origenMaleta = readlineSync.question(`Ingrese el origen de la maleta: `);
 
     let numVuelo = +readlineSync.question(`Ingrese el numero del vuelo: `);
@@ -15,10 +16,10 @@ while (numaletas < tope){
     else
     {   
         const limitePeso = 23;
-        const costoExtra = 20000;
+        const costoExtra = 5000;
         const kilosExtra = pesoMaleta - limitePeso;
         if(pesoMaleta < 23){
-            console.log(`No hay exceso de peso`);
+            console.log(`No hay exceso de peso, el valor de la maleta es de 20.000 `);
         }else{
             let costoAdicional = kilosExtra * costoExtra;
             console.log("El costo adicional por exceder el límite de peso es: " + costoAdicional + " pesos.");
@@ -32,13 +33,18 @@ while (numaletas < tope){
         }
     }
 
-    /*
-    el + al principio convierte en numero 
-    
-    let destino = readlineSync.question(`Ingrese el destino al que viaja: `);
-
-    numaletas = numaletas + 1;*/
-
+    /* El .map devuelve un nuevo arreglo con los resultados de llamar a la función de mapeo para cada elemento del arreglo original.*/
+    const destinos = [`San Andres`, `Pereira`, `Medellin`, `Cali`, `Manizales`, `Barranquilla`, `Bogota`].map(destino => destino.toLowerCase());
+    console.log(destinos)
+    const destinoPromo = `cali`;
+    const valMaleta = 20000;
+    let ciudadPasajero = readlineSync.question(`Ingrese a cual de los destinos se dirige:  `);
+    if(ciudadPasajero === destinoPromo){
+        const descuento = valMaleta*0.15;
+        const totalDescuento = valMaleta - descuento;
+        console.log(`!Se aplico descuento del 15% en el equipaje¡`);
+        console.log(`Su total a pagar por el equipaje es de: `+totalDescuento+ `pesos.`);
+    }
 }
 
 
