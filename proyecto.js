@@ -1,6 +1,6 @@
 const readlineSync = require('readline-sync');
 let numaletas = 0;
-const tope = 10;
+const tope = 3;
 
 while (numaletas < tope){
     
@@ -29,14 +29,13 @@ while (numaletas < tope){
         if (genero == `hombre`){
             console.log(`El propietario de la maleta es hombre`);
         }else if (genero == `mujer`){
-            console.log(`El duenio de la maleta es mujer. `);
+            console.log(`El propietario de la maleta es mujer. `);
         }
     }
 
-    /* El .map devuelve un nuevo arreglo con los resultados de llamar a la función de mapeo para cada elemento del arreglo original.*/
-    const destinos = [`San Andres`, `Pereira`, `Medellin`, `Cali`, `Manizales`, `Barranquilla`, `Bogota`].map(destino => destino.toLowerCase());
+    const destinos = [`San Andres`, `Pereira`, `Medellin`, `Cali`, `Manizales`, `Barranquilla`, `Bogota`];
     console.log(destinos)
-    const destinoPromo = `cali`;
+    const destinoPromo = `Cali`;
     const valMaleta = 20000;
     let ciudadPasajero = readlineSync.question(`Ingrese a cual de los destinos se dirige:  `);
     if(ciudadPasajero === destinoPromo){
@@ -44,9 +43,10 @@ while (numaletas < tope){
         const totalDescuento = valMaleta - descuento;
         console.log(`!Se aplico descuento del 15% en el equipaje¡`);
         console.log(`Su total a pagar por el equipaje es de: `+totalDescuento+ `pesos.`);
+    } else {
+        console.log(`No hay promocion de equipaje para este destino. `);
     }
-}
 
 
     
-
+}
