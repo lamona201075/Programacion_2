@@ -1,6 +1,7 @@
 const readlineSync = require('readline-sync');
 let numaletas = 0;
 const tope = 3;
+let maletamp = [];
 
 while (numaletas < tope){
     
@@ -9,7 +10,9 @@ while (numaletas < tope){
     let numVuelo = +readlineSync.question(`Ingrese el numero del vuelo: `);
     numVuelo = parseInt(numVuelo);
 
+    let maletamp = [];
     let pesoMaleta = readlineSync.question(`Ingrese el peso de la maleta en KG: `);
+    maletamp.push(parseFloat(pesoMaleta)); 
     if(pesoMaleta.length == 0){
         console.error(`El peso de la maleta no puede ser cero`);
     }
@@ -47,6 +50,18 @@ while (numaletas < tope){
         console.log(`No hay promocion de equipaje para este destino. `);
     }
 
+    let numeroMayor = maletamp[0]; // Supongamos que el primer número es el mayor por ahora
+
+    for (let i = 1; i < maletamp.length; i++) {
+        if (maletamp[i] > numeroMayor) {
+            numeroMayor = maletamp[i];
+        }
+}
+
 
     
 }
+
+
+
+console.log(numeroMayor)
