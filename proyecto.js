@@ -4,7 +4,7 @@ const readlineSync = require('readline-sync');
 let maletamp = [];
 let numeroMayor = 0; // Inicializamos el número mayor fuera del bucle
 
-for (contadorMaletas = 1; contadorMaletas < 2; contadorMaletas++) {
+for (contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
 
 
     let origenMaleta = readlineSync.question(`Ingrese el origen de la maleta: `);
