@@ -2,7 +2,6 @@ const readlineSync = require('readline-sync');
 
 
 let maletamp = [];
-let numeroMayor = 0; // Inicializamos el número mayor fuera del bucle
 
 for (contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
 
@@ -71,5 +70,6 @@ for (contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
         }
 
     console.info(`Maleta Num: ${contadorMaletas} registrada exitosamente!`);
+    console.info(`Peso de las maletas registradas en el ${maletamp}`);
 }
    
