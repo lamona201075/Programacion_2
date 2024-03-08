@@ -2,8 +2,14 @@ const readlineSync = require('readline-sync');
 
 let contadorDestinos = {};
 let pesoTotalMaletas = 0;
+let mayorPeso = 0;
+let pesoTotal = 0;
+let totalPesoHombres = 0;
+let totalPesoMujeres = 0;
+let cantidadMaletasMujeres = 0;
+let cantidadMaletasHombres = 0;
 
-for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
+for (let contadorMaletas = 1; contadorMaletas <= 5; contadorMaletas++) {
     let origenMaleta;
     while (true) {
         origenMaleta = readlineSync.question(`Ingrese el origen de la maleta: `);
@@ -44,6 +50,10 @@ for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
                 let costoAdicional = kilosExtra * costoExtra;
                 precioAntesMaleta = valMaleta + costoAdicional;
                 console.log(`El costo adicional por exceder el límite de peso es: ${costoAdicional} pesos.`);
+                pesoTotal += parseFloat(pesoMaleta); // suma el peso de la maleta al peso total
+                if(parseFloat(pesoMaleta)> mayorPeso){ // aqui está comparando el peso actual con el mayor registrado
+                    mayorPeso = parseFloat(pesoMaleta);// actualiza al numero mayor si es necesario
+                }
             }
             break;
         }
@@ -54,8 +64,12 @@ for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
         genero = readlineSync.question(`Ingrese si el propietario de la maleta es hombre(h) o mujer(m): `);
         if (genero === 'h' || genero === 'm') {
             if (genero === 'h') {
+                totalPesoHombres += pesoMaleta;
+                cantidadMaletasHombres++;
                 console.log(`El propietario de la maleta es hombre.`);
             } else {
+                totalPesoMujeres += pesoMaleta;
+                cantidadMaletasMujeres++;
                 console.log(`El propietario de la maleta es mujer.`);
             }
             break;
@@ -95,8 +109,33 @@ for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
 }
 
 // Estos se encuentrar fuera del FOR principal por que solo necesito que me muestre la informacion al final y no despues de cada repeticion del
-console.log(`EL PESO TOTAL DE LAS MALETAS ES DE ${pesoTotalMaletas}`);
-console.log(`DESTINO AL QUE MAS SE DESPACHARON MALETAS`);
+console.log(`EL PESO TOTAL DE LAS MALETAS ES DE ${pesoTotalMaletas} KG `);
+console.log(`LA MALETA CON MAYOR PESO QUE VA EN EL AVION ES: ${mayorPeso} KG`);
+// DESTINO A DONDE SE DESPACHARON MÁS MALETAS
+let destinoMasMaletas;
+let maxMaletas = 0;
 for (let destino in contadorDestinos) {
-    console.log(`Se despacharon a ${destino} ${contadorDestinos[destino]} maletas`);
+    if (contadorDestinos[destino] > maxMaletas) {
+        maxMaletas = contadorDestinos[destino];
+        destinoMasMaletas = destino;
+    }
 }
+console.log(`EL DESTINO AL QUE SE DESPACHARON MAS MALETAS ES ${destinoMasMaletas} CON ${maxMaletas} MALETAS.`);
+
+// PROMEDIO DE MALETAS POR GENERO
+let promedioPesoHombres;
+if (cantidadMaletasHombres === 0) {
+    promedioPesoHombres = 0;
+} else {
+    promedioPesoHombres = totalPesoHombres / cantidadMaletasHombres;
+}
+
+let promedioPesoMujeres;
+if (cantidadMaletasMujeres === 0) {
+    promedioPesoMujeres = 0;
+} else {
+    promedioPesoMujeres = totalPesoMujeres / cantidadMaletasMujeres;
+}
+
+console.log(`El promedio de peso de las maletas para hombres es: ${promedioPesoHombres} KG`);
+console.log(`El promedio de peso de las maletas para mujeres es: ${promedioPesoMujeres} KG`);
