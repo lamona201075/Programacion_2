@@ -1,6 +1,7 @@
 const readlineSync = require('readline-sync');
 
-let contadorDestinos = {}; // Objeto para almacenar los destinos y el número de maletas despachadas a cada destino
+let contadorDestinos = {};
+let pesoTotalMaletas = 0;
 
 for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
     let origenMaleta;
@@ -74,7 +75,7 @@ for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
         if (ciudadPasajero in contadorDestinos) {
             contadorDestinos[ciudadPasajero]++;
         } else {
-            // pero si ya se dijito una vez, se incrementa 
+            // pero si ya se digito una vez, se incrementa 
             contadorDestinos[ciudadPasajero] = 1;
         }
         if (ciudadPasajero === destinoPromo) {
@@ -84,6 +85,8 @@ for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
         } else {
             console.log(`No hay promoción de equipaje para este destino.`);
         }
+        // se agrega el peso de la maleta al total para mostrarlo l final
+        pesoTotalMaletas += Number(pesoMaleta);
         break;
     }
 
@@ -91,8 +94,9 @@ for (let contadorMaletas = 1; contadorMaletas < 3; contadorMaletas++) {
     console.info(`Peso de la maleta: ${pesoMaleta}`);
 }
 
-
-console.log("DESTINO AL QUE MAS SE DESPACHARON MALETAS");
+// Estos se encuentrar fuera del FOR principal por que solo necesito que me muestre la informacion al final y no despues de cada repeticion del
+console.log(`EL PESO TOTAL DE LAS MALETAS ES DE ${pesoTotalMaletas}`);
+console.log(`DESTINO AL QUE MAS SE DESPACHARON MALETAS`);
 for (let destino in contadorDestinos) {
     console.log(`Se despacharon a ${destino} ${contadorDestinos[destino]} maletas`);
 }
