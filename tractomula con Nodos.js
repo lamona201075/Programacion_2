@@ -1,6 +1,5 @@
 const readlineSync = require('readline-sync');
 
-// Clase Camion
 class Camion {
     constructor(conductor, generoConductor, ciudadOrigen, ciudadDestino, consumoGasolina, toneladasCarga, modelo, avaluo, marca, anosAntiguedad) {
         if (!conductor || typeof conductor !== 'string') {
@@ -70,7 +69,7 @@ class Camion {
     }
 }
 
-// Clase Viaje
+
 class Viaje {
     constructor(vehiculo, distancia, tipoCarga, precioKg) {
         this.vehiculo = vehiculo;
@@ -82,13 +81,12 @@ class Viaje {
     calcularPrecioViaje() {
         const impuesto = this.vehiculo.calcularImpuesto();
         const costoTransporte = this.distancia * this.precioKg * this.vehiculo.toneladasCarga;
-        const total = costoTransporte * (1 + impuesto); // Se aplica el impuesto al costo total
+        const total = costoTransporte * (1 + impuesto); 
         const comision = this.vehiculo.calcularComision(this.distancia);
         return total + comision;
     }
 }
 
-// Clase CreadorViajes
 class CreadorViajes {
     constructor() {
         this.viajes = [];
@@ -152,7 +150,7 @@ class CreadorViajes {
     registrarViaje(viaje) {
         const precioViaje = viaje.calcularPrecioViaje();
         console.log(`El precio del viaje es: ${precioViaje} pesos`);
-        this.viajes.push(viaje); // Agregar el viaje a la lista de viajes
+        this.viajes.push(viaje);
     }
 
     calcularDineroTotalRecaudado() {
@@ -237,11 +235,11 @@ class CreadorViajes {
     }
 }
 
-// Instanciación del creador de viajes
+
 const creadorViajes = new CreadorViajes();
 creadorViajes.crearViaje();
 
-// Ejemplo de uso de métodos adicionales
+
 const totalRecaudado = creadorViajes.calcularDineroTotalRecaudado();
 console.log(`Dinero total recaudado: ${totalRecaudado} pesos`);
 
